@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma/build"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Users {
+  id       String @id @unique
+  email    String @unique
+  password String
+
+  projects   Projects[]
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+
+  @@map("users")
+}
+
+model Projects {
+  id                String           @id @unique
+  name              String           @db.VarChar(255)
+  schema_json       String           @db.Text
+  prisma_schema     String           @db.Text
+  database_url      String           @db.Text
+  database_provider DatabaseProvider
+
+  user       Users    @relation(fields: [user_id], references: [id])
+  user_id    String   
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("projects")
+}
+
+enum DatabaseProvider {
+  MYSQL
+  POSTGRESQL
+  SQLITE
+  MONGODB
+}
