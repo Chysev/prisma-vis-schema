@@ -104,10 +104,10 @@ cd ..
 Configure environment variables for your development environment:
 
 ```bash
-cp .env.dev .env.local
+cp .env.dev .env
 ```
 
-Edit `.env.local` with your database and application settings:
+Edit `.env` with your database and application settings:
 
 ```env
 # Server Configuration
