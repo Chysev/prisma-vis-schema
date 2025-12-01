@@ -70,9 +70,6 @@ This application implements a modern web-based database schema design tool that 
 - **Package Manager**: npm (v8+) or yarn (v1.22+)
 - **Database Server**: MySQL 5.7+ (primary) or PostgreSQL 12+, SQLite 3.35+
 - **Version Control**: Git 2.25+
-- **Operating System**: Windows 10+, macOS 10.15+, or Linux (Ubuntu 20.04+)
-- **Memory**: Minimum 4GB RAM (8GB recommended for development)
-- **Storage**: 2GB free disk space
 
 ## Installation & Configuration
 
