@@ -16,7 +16,7 @@ export const DashboardLayout = createRoute({
     getParentRoute: () => rootRoute,
     path: "/dashboard",
     beforeLoad: async ({ location }) => {
-        await authMiddleware(location.pathname, location.search);
+        await authMiddleware(location.pathname);
     },
     component: () => (
         <QueryClientProvider client={queryClient}>
@@ -29,7 +29,7 @@ export const AuthLayout = createRoute({
     getParentRoute: () => rootRoute,
     path: "/auth",
     beforeLoad: async ({ location }) => {
-        await authMiddleware(location.pathname, location.search);
+        await authMiddleware(location.pathname);
     },
     component: () => (
         <QueryClientProvider client={queryClient}>
@@ -42,7 +42,7 @@ export const EditorRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: "/editor/$id",
     beforeLoad: async ({ location }) => {
-        await authMiddleware(location.pathname, location.search);
+        await authMiddleware(location.pathname);
     },
     component: () => (
         <QueryClientProvider client={queryClient}>
