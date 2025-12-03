@@ -2,9 +2,9 @@ import path from "path";
 import Api from "@/lib/api";
 import fs from "fs/promises";
 import { promisify } from 'util';
-const execAsync = promisify(exec);
 import { exec } from 'child_process';
 import { existsSync, mkdirSync } from "fs";
+const execAsync = promisify(exec);
 import { Request, Response, NextFunction } from "express";
 import { HttpError } from "@/lib/error";
 
