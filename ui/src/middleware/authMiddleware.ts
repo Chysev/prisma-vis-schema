@@ -5,15 +5,22 @@ interface AuthSuccessResponse {
     [key: string]: any;
 }
 
-export const authMiddleware = async (pathname: string): Promise<AuthSuccessResponse | null> => {
+interface LocationContext {
+    pathname: string;
+    search?: { redirect?: string };
+}
+
+export const authMiddleware = async (location: LocationContext): Promise<AuthSuccessResponse | null> => {
+    const { pathname, search } = location;
     const auth_route = pathname === "/auth/register" || pathname === "/auth/login";
 
     try {
         const response = await authApi.session();
 
         if (auth_route) {
+            const redirectTo = search?.redirect || "/dashboard";
             throw redirect({
-                to: "/dashboard",
+                to: redirectTo,
             });
         }
 

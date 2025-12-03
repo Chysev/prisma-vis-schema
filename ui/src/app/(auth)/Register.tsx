@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useAuth } from '@/db/queries/useAuth'
 import { Input } from '@/components/ui/input';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Register = () => {
+    const navigate = useNavigate();
+    const search = useSearch({ from: '/auth/register' }) as { redirect?: string };
+
     const [state, setState] = useState({
         email: '',
         password: '',
@@ -24,6 +27,9 @@ const Register = () => {
                 email: state.email,
                 password: state.password
             })
+
+            const redirectTo = search.redirect || "/dashboard";
+            navigate({ to: redirectTo })
         } catch (error) {
             setState({ ...state, error: 'Registration failed.' })
         }
