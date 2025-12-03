@@ -5,7 +5,7 @@ interface AuthSuccessResponse {
     [key: string]: any;
 }
 
-export const authMiddleware = async (pathname: string): Promise<AuthSuccessResponse | null> => {
+export const authMiddleware = async (pathname: string, searchParams?: Record<string, string>): Promise<AuthSuccessResponse | null> => {
     const auth_route = pathname === "/auth/register" || pathname === "/auth/login";
 
     if (auth_route) {
@@ -15,12 +15,12 @@ export const authMiddleware = async (pathname: string): Promise<AuthSuccessRespo
     try {
         const response = await authApi.session();
 
-        // if (auth_route) {
-        //     const redirectTo = searchParams?.redirect
-        //     throw redirect({
-        //         to: redirectTo,
-        //     });
-        // }
+        if (auth_route) {
+            const redirectTo = searchParams?.redirect
+            throw redirect({
+                to: redirectTo,
+            });
+        }
 
         return response.data;
     } catch (error: any) {
