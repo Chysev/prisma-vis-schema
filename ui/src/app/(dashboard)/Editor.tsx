@@ -92,14 +92,6 @@ const EditorContent = () => {
         }
     }, [nodes, selectedNode?.id]);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            navigate({ to: "/auth/login" });
-            return;
-        }
-    }, [navigate]);
-
     useLayoutEffect(() => {
         if (project?.schema_json) {
             try {
