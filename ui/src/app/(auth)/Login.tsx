@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import React, { useState } from 'react'
 import { Input } from '@/components/ui/input';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 import { useAuth } from '@/db/queries/useAuth';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 const Login = () => {
     const navigate = useNavigate();
+    const search = useSearch({ from: '/auth/login' }) as { redirect?: string };
 
     const [state, setState] = useState({
         email: '',
@@ -31,7 +32,8 @@ const Login = () => {
             if (response.statusCode === 200) {
                 Cookies.set(`${import.meta.env.VITE_TOKEN_NAME}`, response.data.token, { expires: 7 });
                 setTimeout(() => {
-                    navigate({ to: "/dashboard" })
+                    const redirectTo = search.redirect || "/dashboard";
+                    navigate({ to: redirectTo })
                 }, 1000)
             }
         } catch (error) {
