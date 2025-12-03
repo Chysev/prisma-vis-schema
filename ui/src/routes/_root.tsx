@@ -41,9 +41,9 @@ export const AuthLayout = createRoute({
 export const EditorRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: "/editor/$id",
-    beforeLoad: async ({ location }) => {
-        await authMiddleware(location.pathname);
-    },
+    // beforeLoad: async ({ location }) => {
+    //     await authMiddleware(location.pathname);
+    // },
     component: () => (
         <QueryClientProvider client={queryClient}>
             <Editor />
